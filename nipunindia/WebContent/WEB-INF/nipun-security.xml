@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <security:global-method-security secured-annotations="enabled" />
+    
+    <security:http>
+        <!-- Restrict URLs based on role -->
+        <security:intercept-url pattern="/ad**" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/amus**" access="ROLE_AMUS" />
+        <security:intercept-url pattern="/dmin**" access="ROLE_DMIN" />
+        <security:intercept-url pattern="/dain**" access="ROLE_DAIN" />
+        <security:intercept-url pattern="/index**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/resetpassword" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/logoutSuccess*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        
+        <security:intercept-url pattern="/resource/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+       
+
+        <security:intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
+
+        <!-- Override default login and logout pages -->
+        <security:form-login login-page="/login" 
+        	default-target-url="/welcome" authentication-success-handler-ref="authinticationSuccessHandler" 
+            authentication-failure-url="/login.html?login_error=1" authentication-failure-handler-ref="loginFailureHandler"  />
+        <security:logout success-handler-ref="logoutSuccessHandler" invalidate-session="true" delete-cookies="login" />
+    </security:http>
+
+   	<security:authentication-manager>
+		<security:authentication-provider>
+ 			<!-- <security:password-encoder hash="bcrypt" /> -->
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select email,password,true from user_auth where email=? and active='Y'"
+				authorities-by-username-query="select email, role from user where email = ?" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="authinticationSuccessHandler" class="com.nipun.login.LoginSuccessHndler">
+		<!-- <property name="defaultTargetUrl" value="/welcome" /> -->
+	</bean>
+
+	<bean id="logoutSuccessHandler" class="com.nipun.login.LogoutHandler">
+		<!-- <property name="defaultTargetUrl" value="/login" /> -->
+	</bean>
+
+	<bean id="loginFailureHandler" class="com.nipun.login.LoginFailureHandler">
+		<!-- <property name="defaultTargetUrl" value="/login" /> -->
+	</bean>
+
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+</beans>
