@@ -44,13 +44,7 @@ body {
 	
 }
 
-
-
-
-
-
-
- #wrapper {
+#wrapper {
     width: 100%;
     margin-top:50px;
 }
@@ -167,21 +161,43 @@ min-height: 80px;
  
  @media(min-width:768px) {
      #page-wrapper{
-               margin: 0 0 0 260px;
+     	margin: 0 0 0 260px;
         padding: 15px 30px;
         min-height: 1050px;
 		
     }
 	
-	
     .navbar-side {
         z-index: 1;
         position: absolute;
         width: 260px;
-       
-    }
+    } 
+}
 
- 
+.hvTable {display:block; padding:0; margin-top:10px;}
+.hvTable fieldset {background:#fff; padding:10px; border: 2px solid #6ba96f;}
+div.dataTables_wrapper {width:100%; margin: 0 auto;}
+div.dataTables_wrapper thead th {background:#6ba96f; color:#fff; font-size:13px; font-weight:normal;}
+div.dataTables_wrapper td {font-size:12px;}
+div.dataTables_wrapper td:last-child {text-align:center!Important;}
+
+.dataTables_filter {margin-bottom:10px;}
+.dataTables_filter input[type=search] {
+    display: inline-block;
+    height: 26px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 

@@ -4,13 +4,10 @@
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Responsive Admin</title>
-	<!-- BOOTSTRAP STYLES-->
-    <link href="resource/css/bootstrap.css" rel="stylesheet" />
-     <!-- FONTAWESOME STYLES-->
-    <link href="resource/css/font-awesome.css" rel="stylesheet" />
-    <link href="resource/css/jquery.dataTables.css" />
-      <!-- CUSTOM STYLES-->
+    <link href="resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="resource/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="resource/css/custom.css" rel="stylesheet" />
+    <link href="resource/css/font-awesome.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -69,24 +66,25 @@
                     <div class="col-md-12">
                      <h2>Manage User</h2>   
                        <div class="hvTable">
-                        <h5></h5>
-                        <table id="manageUserTable" class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-									<th>Telephone No.</th>
-									<th>Edit</th>
-									<th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        	<fieldset>
+                        		<table id="manageUserTable" class="display compact table table-striped table-bordered" cellspacing="0" width="100%">
+                            		<thead>
+	                                	<tr>
+		                                    <th>First Name</th>
+		                                    <th>Last Name</th>
+		                                    <th>Username</th>
+											<th>Telephone No.</th>
+											<th>Edit</th>
+											<th>Delete</th>
+		                                </tr>
+                            		</thead>
+                            		<tbody>
                                
-                            </tbody>
-                        </table>
-
+                            		</tbody>
+                        		</table>
+                        </fieldset>
                     </div> 
+                    
 					<!--<div class="col-lg-4 col-md-4">
                         <label>Click to Add User</label>
                         <a href="blank.html" target="_blank" class="btn btn-danger btn-lg btn-block">Add User</a>
