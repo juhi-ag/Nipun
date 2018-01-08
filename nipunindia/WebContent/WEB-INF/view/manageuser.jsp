@@ -4,7 +4,7 @@
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Responsive Admin</title>
-    <link href="resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="resource/css/bootstrap.css" rel="stylesheet" />
     <link href="resource/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="resource/css/custom.css" rel="stylesheet" />
     <link href="resource/css/font-awesome.css" rel="stylesheet" />
