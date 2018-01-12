@@ -92,8 +92,12 @@
 					<div class="row">
                     <div class="col-lg-4 col-md-4">
                     </div>
+                  
                     <div class="col-lg-4 col-md-4">
+                
+                 <br>
                         <a href="blank.html" target="_blank" class="btn btn-danger btn-lg btn-block">Add User</a>
+                   
                     </div>
                     <div class="col-lg-4 col-md-4">
                     </div>

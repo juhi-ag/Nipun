@@ -156,6 +156,24 @@ min-height: 80px;
     }
 
 /*==============================================
+    Form Specific     
+    =============================================*/
+div#page-inline {
+    float: left;
+    display: block;
+    width: 50%;
+}
+
+label.labling
+{
+	float: left;
+	display: block;
+	width:10%;
+	
+}
+
+
+/*==============================================
     MEDIA QUERIES     
     =============================================*/
  
