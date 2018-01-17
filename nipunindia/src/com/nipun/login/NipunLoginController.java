@@ -46,6 +46,14 @@ public class NipunLoginController  implements ServletContextAware
 		return mv;
 	}
 	
+	@RequestMapping(value="/adduser")
+	public ModelAndView addUser(HttpServletRequest req, HttpServletResponse res)
+	{
+		ModelAndView mv=new ModelAndView("adduser");
+		mv.addObject("Message", "Success");
+		return mv;
+	}
+	
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpServletRequest req, HttpServletResponse res)
 	{

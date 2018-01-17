@@ -96,7 +96,7 @@
                     <div class="col-lg-4 col-md-4">
                 
                  <br>
-                        <a href="blank.html" target="_blank" class="btn btn-danger btn-lg btn-block">Add User</a>
+                        <a href="/nipunindia/adduser" class="btn btn-danger btn-lg btn-block">Add User</a>
                    
                     </div>
                     <div class="col-lg-4 col-md-4">
@@ -127,12 +127,12 @@
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    <script src="resource/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="resource/js/jquery-1.10.2.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
-    <script src="resource/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resource/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
-    <script src="resource/js/custom.js"></script>
-    <script src="http://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="resource/js/custom.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     
     <script>
     var recManageUserArr = new Array();
@@ -172,7 +172,7 @@
     					if(data[i].mobile != null && data[i].mobile != "") {
     						telephoneNo = data[i].mobile;
     					}
-    					$('#manageUserTable').dataTable().fnAddData(["<tr><td>"+firstName+"</td>","<td>"+lastName+"</td>","<td>"+username+"</td>","<td>"+telephoneNo+"</td>","<td><button type='button' id='modifyUser' class='btn btn-warning btn-xs margR10' onClick='modifyUser("+i+")'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Edit</button></td>","<td><button type='button' id='deleteUser' class='btn btn-danger btn-xs' onClick='deleteUser("+i+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Delete</button></td></tr>"]);
+    					$('#manageUserTable').dataTable().fnAddData(["<tr><td>"+firstName+"</td>","<td>"+lastName+"</td>","<td>"+username+"</td>","<td>"+telephoneNo+"</td>","<td><button type='button' id='modifyUser' class='btn btn-warning btn-xs margR10' onClick='modifyUser("+i+")'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Edit</button></td>","<td><button type='button' class='btn btn-danger btn-xs' onClick='deleteUser("+i+")'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Delete</button></td></tr>"]);
     					
     					index++;
     				}
@@ -189,7 +189,35 @@
     		}
     	}) 
     }
-    </script>
+    
+    function deleteUser(index) {
+    	if(confirm("Are you sure you want to delete the user?")) {
+    		recManageUser=recManageUserArr[index];
+			
+			$.ajax({
+				url:"deleteUser.do?id="+recManageUser.user_auth_id,
+				method:"POST",						
+				success: function(data, textStatus, xhr)
+				{
+					if(data=='success'){
+						loadManageUserTable();
+					}else{
+						
+					}
+				},
+				error: function(xhr, textStatus, errorThrow)
+				{	
+					/* $("#programMsg").addClass("alert-danger");
+					$("#programMsg").show().html("Ajax error occurred while adding campaign.");
+					setTimeout(function(){$("#programMsg").hide()},3000); */
+				}
+			}) ;
+    	}
+    	else {
+    		return false;
+    	}
+    }    
+</script>
    
 </body>
 </html>

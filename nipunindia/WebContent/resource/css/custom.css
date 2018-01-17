@@ -219,3 +219,5 @@ div.dataTables_wrapper td:last-child {text-align:center!Important;}
 }
 
 
+label.error {color:#cf1133!important; margin:0; font-size:11px;}
+#j_email-error, #j_password-error {display:none;}
