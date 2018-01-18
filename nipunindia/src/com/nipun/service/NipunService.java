@@ -9,10 +9,14 @@ public interface NipunService {
 	
 	public List<Map<String, Object>> loadManageUserData();
 	
-	public Integer checkEmailExists(String email);
+	public boolean checkEmailExistsBasedOnUserAuthId(String email, Integer userAuthId);
+	
+	public boolean checkEmailExists(String email);
 	
 	public Integer createUser(User user);
 	
 	public void deleteUser(int id) throws Exception;
+	
+	public void updateUser(User user);
 	
 }

@@ -17,19 +17,30 @@ public class NipunServiceImpl implements NipunService {
 		return nipunDao.loadManageUserData();
 	}
 	
-	public Integer checkEmailExists(String email) {
+	public boolean checkEmailExistsBasedOnUserAuthId(String email, Integer userAuthId) {
+		return nipunDao.checkEmailExistsBasedOnUserAuthId(email, userAuthId);
+	}
+	
+	public boolean checkEmailExists(String email) {
 		return nipunDao.checkEmailExists(email);
 	}
 	
 	public Integer createUser(User user) {
 		Integer userId = nipunDao.createUser(user);
 		if(userId > 0) {
-			nipunDao.insertPassword(user);
+			nipunDao.insertUserAuth(user, userId);
 		}
 		return userId;
 	}
 	
 	public void deleteUser(int id) throws Exception {
 		nipunDao.deleteUser(id);
+	}
+	
+	public void updateUser(User user) {
+		int result = nipunDao.updateUser(user);
+		if(result > 0) {
+			nipunDao.updateUserAuth(user);
+		}
 	}
 }

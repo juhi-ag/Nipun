@@ -2,6 +2,8 @@ package com.nipun.pojo;
 
 public class User {
 	
+	private Integer userId;
+	private Integer userAuthId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -9,6 +11,18 @@ public class User {
 	private String tempPassword;
 	private String reTypePassword;
 	
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Integer getUserAuthId() {
+		return userAuthId;
+	}
+	public void setUserAuthId(Integer userAuthId) {
+		this.userAuthId = userAuthId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

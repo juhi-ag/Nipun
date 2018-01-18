@@ -43,20 +43,28 @@ public class NipunController implements ServletContextAware
 	@RequestMapping(value="/createUser.do")
 	public void createUser(HttpServletRequest request, HttpServletResponse response, User user)
 	{
-		JSONObject responseJson = new JSONObject();
-		Integer userId = nipunService.checkEmailExists(user.getEmail());
-		if(userId > 0) {
-			responseJson.put("userId", userId);
-			responseJson.put("message","userExists");
+		String message = "";
+		if(user.getUserAuthId() != null && user.getUserAuthId() > 0) {
+			if(nipunService.checkEmailExistsBasedOnUserAuthId(user.getEmail(), user.getUserAuthId())) {
+				message = "userExists";
+			}
+			else {
+				nipunService.updateUser(user);
+				message = "success";
+			}
 		}
 		else {
-			userId = nipunService.createUser(user);
-			
-			responseJson.put("userId", userId);
-			responseJson.put("message","success");
+			if(nipunService.checkEmailExists(user.getEmail())) {
+				message = "userExists";
+			}
+			else {
+				nipunService.createUser(user);
+				message = "success";
+			}
 		}
+		
 		try {
-			response.getWriter().write(responseJson.toString());
+			response.getWriter().write(message);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -21,20 +21,29 @@ public class NipunDaoImpl implements NipunDao{
 	JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> loadManageUserData() {
-		String sql = "select * from user u, user_auth ua where u.email=ua.email and ua.active='Y'";
+		String sql = "select * from user u, user_auth ua where u.user_id=ua.user_id and ua.active='Y'";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}
 	
-	public Integer checkEmailExists(String email) {
-		Integer userExists=0;
-		
-		List<Integer> list = jdbcTemplate.queryForList("select user_id from user where email='"+ email + "'", Integer.class);
-		if(list.size()>0)
-		{
-			userExists=list.get(0);
+	public boolean checkEmailExistsBasedOnUserAuthId(String email, Integer userAuthId) {
+		boolean userAlreadExists = false;
+		String query = "select count(*) as count from user_auth where active='Y' and email=? and user_auth_id!=?";
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(query, email, userAuthId);
+		if (Integer.parseInt(list.get(0).get("count").toString()) > 0) {
+			userAlreadExists = true;
 		}
-		return userExists;
+		return userAlreadExists;
+	}
+	
+	public boolean checkEmailExists(String email) {
+		boolean userAlreadExists = false;
+		String query = "select count(*) as count from user_auth where active='Y' and email=?";
+		List<Map<String, Object>> list = jdbcTemplate.queryForList(query, email);
+		if (Integer.parseInt(list.get(0).get("count").toString()) > 0) {
+			userAlreadExists = true;
+		}
+		return userAlreadExists;
 	}
 	
 	public Integer createUser(final User user) {
@@ -65,12 +74,12 @@ public class NipunDaoImpl implements NipunDao{
 		return userId;
 	}
 	
-	public Integer insertPassword(final User user) {
+	public Integer insertUserAuth(final User user, final Integer userId) {
 		Integer userAuthId = null;
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		// performs the insert in the database
 		try {
-			final String query = "insert into user_auth (password,email,active) values (?,?,?)";
+			final String query = "insert into user_auth (password,email,active,user_id) values (?,?,?,?)";
 				jdbcTemplate.update(new PreparedStatementCreator() {
 			    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 			    		PreparedStatement ps = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -78,6 +87,7 @@ public class NipunDaoImpl implements NipunDao{
 			            ps.setString(1, String.valueOf(user.getTempPassword()));
 			            ps.setString(2, String.valueOf(user.getEmail()));
 			            ps.setString(3, "Y");
+			            ps.setInt(4, userId);
 
 			            return ps;
 			        }
@@ -94,5 +104,15 @@ public class NipunDaoImpl implements NipunDao{
 	public void deleteUser(int id) throws Exception {
 		String query = "update user_auth set active='N' where user_auth_id=?";
 		jdbcTemplate.update(query, id);
+	}
+	
+	public int updateUser(User user) {
+		String query = "update user set firstname=?, lastname=?, email=?, mobile=? where user_id=?";
+		return jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), user.getEmail(), user.getTelephoneNumber(), user.getUserId());
+	}
+	
+	public int updateUserAuth(User user) {
+		String query = "update user_auth set password=?, email=?, active='Y' where user_auth_id=?";
+		return jdbcTemplate.update(query, user.getReTypePassword(), user.getEmail(), user.getUserAuthId());
 	}
 }
