@@ -87,7 +87,7 @@
                     		<div class="col-lg-4 col-md-4"></div>
                     		<div class="col-lg-4 col-md-4">
                  				<br>
-                        		<a href="#" data-toggle="modal" data-target="#addUserModal" class="btn btn-danger btn-lg btn-block">Add User</a>
+                        		<a href="#" data-toggle="modal" data-target="#addUserModal" class="btn btn-danger btn-lg btn-block" onclick="addUser()">Add User</a>
                     		</div>
                     		<div class="col-lg-4 col-md-4">
                     		</div>
@@ -104,7 +104,7 @@
 				<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeUserModal"><span aria-hidden="true" class="cbtn">&times;</span></button>
-					<h4 class="modal-title" id="addUserModalLabel">Add User</h4>
+					<h4 class="modal-title" id="addUserModalLabel"></h4>
 				</div>
 				<div class="modal-body">
 					<div class="clearfix"></div>
@@ -153,7 +153,7 @@
 						                        <div class="col-lg-10">
 						                        	<div class="col-lg-4"></div>
 							                        <div class="col-lg-6">
-														<input type="button" id="sbmt_btn" value="Submit" class="btn login-btn-danger login-btn-lg btn-block" onClick="addUser()">
+														<input type="button" id="sbmt_btn" value="Submit" class="btn login-btn-danger login-btn-lg btn-block" onClick="submitUser()">
 													</div>
 												</div>
 											</form>
@@ -263,6 +263,20 @@
     	}) 
     }
     
+    function addUser() {
+    	$("#addUserModal").modal("show");
+    	$("#addUserModalLabel").text("Add User");
+    	
+    	$("#j_firstname").val("");
+		$("#j_lastname").val("");
+		$("#j_email").val("");
+		$("#j_telephone").val("");
+		$("#j_password").val("");
+		$("#j_repassword").val("");
+		$("#j_userauthid").val("");
+		$("#j_userid").val("");
+    }
+    
     function modifyUser(index) {
     	$("#addUserModal").modal("show");
     	$("#addUserModalLabel").text("Edit User");
@@ -311,7 +325,7 @@
     	return expr.test(email);
     };
     
-	function addUser() {
+	function submitUser() {
 		if($("#adduser_form").valid()) {
 			if (!IsValidEmail($("#j_email").val())) {
 				$("#j_email-error").show().html('* Please enter a valid email address.');
