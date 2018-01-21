@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.nipun.dao.NipunDao;
 import com.nipun.pojo.User;
@@ -12,6 +16,9 @@ public class NipunServiceImpl implements NipunService {
 	
 	@Autowired
 	NipunDao nipunDao;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> loadManageUserData() {
 		return nipunDao.loadManageUserData();
@@ -26,9 +33,15 @@ public class NipunServiceImpl implements NipunService {
 	}
 	
 	public Integer createUser(User user) {
+		/*DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+		TransactionStatus status=null;
+		dataSourceTransactionManager.setDataSource(jdbcTemplate.getDataSource());
+		
+		status = dataSourceTransactionManager.getTransaction(new DefaultTransactionDefinition());*/
 		Integer userId = nipunDao.createUser(user);
 		if(userId > 0) {
-			nipunDao.insertUserAuth(user, userId);
+			nipunDao.insertUserAuth(user);
+			//dataSourceTransactionManager.commit(status);
 		}
 		return userId;
 	}

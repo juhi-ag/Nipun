@@ -21,14 +21,14 @@ public class NipunDaoImpl implements NipunDao{
 	JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> loadManageUserData() {
-		String sql = "select * from user u, user_auth ua where u.user_id=ua.user_id and ua.active='Y'";
+		String sql = "select * from user u, user_auth ua where u.email=ua.email and ua.active='Y'";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}
 	
 	public boolean checkEmailExistsBasedOnUserAuthId(String email, Integer userAuthId) {
 		boolean userAlreadExists = false;
-		String query = "select count(*) as count from user_auth where active='Y' and email=? and user_auth_id!=?";
+		String query = "select count(*) as count from user u, user_auth ua where u.email=ua.email and active='Y' and u.email=? and user_auth_id!=?";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(query, email, userAuthId);
 		if (Integer.parseInt(list.get(0).get("count").toString()) > 0) {
 			userAlreadExists = true;
@@ -74,12 +74,12 @@ public class NipunDaoImpl implements NipunDao{
 		return userId;
 	}
 	
-	public Integer insertUserAuth(final User user, final Integer userId) {
+	public Integer insertUserAuth(final User user) {
 		Integer userAuthId = null;
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		// performs the insert in the database
 		try {
-			final String query = "insert into user_auth (password,email,active,user_id) values (?,?,?,?)";
+			final String query = "insert into user_auth (password,email,active) values (?,?,?)";
 				jdbcTemplate.update(new PreparedStatementCreator() {
 			    	public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 			    		PreparedStatement ps = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -87,7 +87,6 @@ public class NipunDaoImpl implements NipunDao{
 			            ps.setString(1, String.valueOf(user.getTempPassword()));
 			            ps.setString(2, String.valueOf(user.getEmail()));
 			            ps.setString(3, "Y");
-			            ps.setInt(4, userId);
 
 			            return ps;
 			        }
