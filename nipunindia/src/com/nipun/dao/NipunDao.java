@@ -15,7 +15,7 @@ public interface NipunDao {
 	
 	public Integer createUser(User user);
 	
-	public Integer insertUserAuth(User user);
+	public Integer insertUserAuth(User user, Integer userId);
 	
 	public void deleteUser(int id) throws Exception;
 	
