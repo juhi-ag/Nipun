@@ -25,7 +25,7 @@ public class NipunLoginController  implements ServletContextAware
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse res)
 	{
 		ModelAndView mv=new ModelAndView("login");
-		System.out.println("--- success---");
+		System.out.println("--- success---1");
 		mv.addObject("Message", "Success");
 		return mv;
 	}

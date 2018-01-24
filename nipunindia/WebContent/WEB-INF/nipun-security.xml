@@ -37,8 +37,8 @@
  			<!-- <security:password-encoder hash="bcrypt" /> -->
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select email,password,true from user_auth ua, user u where u.user_id=ua.user_id and email=? and active='Y'"
-				authorities-by-username-query="select email, role from user where email = ?" />
+				users-by-username-query="select ua.email,ua.password,true from user_auth ua, user u where u.user_id=ua.user_auth_id and ua.email=? and ua.active='Y'"
+				authorities-by-username-query="select u.email, u.role from user u where u.email = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
