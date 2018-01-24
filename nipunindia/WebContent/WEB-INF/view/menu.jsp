@@ -5,15 +5,15 @@
 
 
                     <li class="active-link">
-                        <a href="dashboard.jsp" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                        <a href="/nipunindia/welcome" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
                     </li>
                    
 
                     <li>
-                        <a href="manageuser.jsp"><i class="fa fa-table "></i>Manage User<span class="badge">Included</span></a>
+                        <a href="/nipunindia/manageuser"><i class="fa fa-table "></i>Manage User</a>
                     </li>
                     <li>
-                        <a href="manageproject.jsp"><i class="fa fa-edit "></i>Manage Project<span class="badge">Included</span></a>
+                        <a href="manageproject.jsp"><i class="fa fa-edit "></i>Manage Project</a>
                     </li>
 
 
@@ -25,10 +25,10 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>Default Value Assignation</a>
+                        <a href="DefaultValueAssignation.jsp"><i class="fa fa-edit "></i>Default Value Assignation</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table "></i>My Link Four</a>
+                        <a href="#"><i class="fa fa-table "></i>Project Status</a>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-edit "></i>My Link Five </a>

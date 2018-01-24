@@ -1,4 +1,4 @@
-package com.nipun.dao;
+ package com.nipun.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +21,7 @@ public class NipunDaoImpl implements NipunDao{
 	JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> loadManageUserData() {
-		String sql = "select * from user u, user_auth ua where u.user_id=ua.user_id and ua.active='Y'";
+		String sql = "select firstname,lastname,u.email,mobile from user u, user_auth ua where u.user_id=ua.user_auth_id and ua.active='Y' ";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}

@@ -23,7 +23,8 @@ public class LoginJDBCTemplate implements LoginDAO
 	public Login getLogin(String email) 
 	{
 		
-		String sql="select * from user u, user_auth ua where u.user_id=ua.user_id and email='"+email+"'";
+		String sql="select * from user u, user_auth ua where u.user_id=ua.user_auth_id and u.email='"+email+"'";
+		System.out.println("sql----> "+sql);
 		List<Login> login=jdbcTemplateObject.query(sql, new LoginMapper());
 		if(login!=null && !login.isEmpty())
 		{
