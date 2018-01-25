@@ -18,7 +18,7 @@
 
 
                     <li>
-                        <a href="otp.jsp"><i class="fa fa-qrcode "></i>OTP</a>
+                        <a href="/nipunindia/otp"><i class="fa fa-qrcode "></i>OTP</a>
                     </li>
                     <li>
                         <a href="ManageAssignedPeople.jsp"><i class="fa fa-bar-chart-o"></i>Assigned People</a>
