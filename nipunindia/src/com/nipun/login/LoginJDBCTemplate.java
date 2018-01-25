@@ -22,9 +22,9 @@ public class LoginJDBCTemplate implements LoginDAO
 	@Override
 	public Login getLogin(String email) 
 	{
-		
-		String sql="select * from user u, user_auth ua where u.user_id=ua.user_auth_id and u.email='"+email+"'";
-		System.out.println("sql----> "+sql);
+		System.out.println("Email-->"+email);
+		String sql="select firstname,lastname,ua.email,mobile,role,adharno,panno,ua.created_by,updated_by,ua.created_on,ua.updated_on,u.user_id,ua.user_auth_id,ua.password,ua.Active from user u, user_auth ua where u.user_id=ua.user_auth_id and ua.email='"+email+"'";
+		System.out.println("SQL in Login "+sql);
 		List<Login> login=jdbcTemplateObject.query(sql, new LoginMapper());
 		if(login!=null && !login.isEmpty())
 		{

@@ -39,7 +39,9 @@ public class NipunServiceImpl implements NipunService {
 	
 	public void updateUser(User user) {
 		int result = nipunDao.updateUser(user);
+		System.out.println("Update result row number--->"+result);
 		if(result > 0) {
+			System.out.println("##########Going to updateUser##########");
 			nipunDao.updateUserAuth(user);
 		}
 	}

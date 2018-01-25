@@ -44,7 +44,7 @@ public class NipunController implements ServletContextAware
 	public void createUser(HttpServletRequest request, HttpServletResponse response, User user)
 	{
 		String message = "";
-		if(user.getUserAuthId() != null && user.getUserAuthId() > 0) {
+		if(user.getUserAuthId() != null && user.getUserAuthId() > 0) {			
 			if(nipunService.checkEmailExistsBasedOnUserAuthId(user.getEmail(), user.getUserAuthId())) {
 				message = "userExists";
 			}
@@ -53,11 +53,11 @@ public class NipunController implements ServletContextAware
 				message = "success";
 			}
 		}
-		else {
+		else {			
 			if(nipunService.checkEmailExists(user.getEmail())) {
 				message = "userExists";
 			}
-			else {
+			else {				
 				nipunService.createUser(user);
 				message = "success";
 			}
@@ -71,7 +71,8 @@ public class NipunController implements ServletContextAware
 	}
 	
 	@RequestMapping("/deleteUser.do")
-	public String deleteUser(HttpServletRequest request, HttpServletResponse response){
+	public String deleteUser(HttpServletRequest request, HttpServletResponse response){		
+		//int id = Integer.parseInt(request.getParameter("id").toString());
 		int id = Integer.valueOf(request.getParameter("id").toString());
 		String result="";
 		

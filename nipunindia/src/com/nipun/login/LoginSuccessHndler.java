@@ -32,20 +32,23 @@ public class LoginSuccessHndler implements AuthenticationSuccessHandler
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException 
 	{
+		System.out.println("Entering onAuthenticationSuccess method");
 		String usernameParameter =usernamePasswordAuthenticationFilter.getUsernameParameter();
         String lastUserName = request.getParameter(usernameParameter);
+        System.out.println("lastUserName----> "+lastUserName);
         String url=null;
         String role="";
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
         	role=grantedAuthority.getAuthority();
+        	System.out.println("##ROLE---> "+role);
             if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_ADMIN"))
             {
                 url="/welcome";
                 break;
             }
             else {
-            	url="/welcome";
+            	url="/userotp";
                 break;
             }
         }
@@ -57,9 +60,15 @@ public class LoginSuccessHndler implements AuthenticationSuccessHandler
         login.setRole(role);
         request.getSession().setAttribute("login", login);
         
-        if(url!=null)
+        if(url!=null && url.equals("/welcome"))
         {
         	request.getRequestDispatcher("welcome").forward(request, response);
+        }else
+        if(url!=null && url.equals("/userotp"))
+        {
+        	System.out.println("Going to User OTP "+login.getUserID());
+        	request.getSession().setAttribute("userid", login.getUserID());
+        	request.getRequestDispatcher("userotp").forward(request, response);
         }
         else
         {
