@@ -1,3 +1,7 @@
+<%@page import="java.util.*" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -5,19 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One Time Password</title>
 	<!-- BOOTSTRAP STYLES-->
-    <link href="../resource/css/bootstrap.css" rel="stylesheet" />
+    <link href="resource/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
-    <link href="../resource/css/font-awesome.css" rel="stylesheet" />
+    <link href="resource/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="../resource/css/custom.css" rel="stylesheet" />
+    <link href="resource/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-</head>
+</head> 
 <body>
-     
-           
+       
           
-    <div id="wrapper">
+  
       
          <jsp:include page="header1.jsp" /> 
         <!-- /. NAV TOP  -->
@@ -26,11 +29,14 @@
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                  <div class="col-md-12">
-                     <h2>One Time Password</h2>   
-                       <div class="project-col-lg-4 col-md-6">
+                  <div class="col-md-12"> <br></br>
+                  <h2>One Time Password</h2>  
+                    
+                      
+                       <div class="hvTable">
                         <h5></h5>
-                        <table class="table table-striped table-bordered table-hover">
+                        <fieldset>
+                        <table class="display compact table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>User ID</th>
@@ -42,41 +48,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="rtrvOTP" items="${retriveOTP}">
                                 <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-									<td>9897198763</td>
-									<td>123456</td>
+                                    <td>${rtrvOTP.userID}</td>
+                                    <td>${rtrvOTP.userFirstName}</td>
+                                    <td>${rtrvOTP.userLastName}</td>
+                                    <td>${rtrvOTP.userEmail}</td>
+									<td>${rtrvOTP.userMobileNo}</td>
+									<td>${rtrvOTP.userOtp}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-									<td>98378494</td>
-									<td>123456</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-									<td>838494040</td>
-									<td>123456</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-									<td>637383930</td>
-									<td>123456</td>
-                                </tr>
+                           </c:forEach>                                 
                             </tbody>
                         </table>
-
+		</fieldset>
                     </div> 
 					<!--<div class="col-lg-4 col-md-4">
                         <label>Click to Add User</label>
@@ -109,18 +93,15 @@
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
-        </div>
-         
+      
+       
   <jsp:include page="footer.jsp" />
      <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+      <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    <script src="../resource/js/jquery-1.10.2.js"></script>
+    <script src="resource/js/jquery-1.10.2.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
-    <script src="../resource/js/bootstrap.min.js"></script>
+    <script src="resource/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
-    <script src="../resource/js/custom.js"></script>
-    
-   
-</body>
+    <script src="resource/js/custom.js"></script> </body>
 </html>

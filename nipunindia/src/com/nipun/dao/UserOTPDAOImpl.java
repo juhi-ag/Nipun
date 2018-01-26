@@ -45,6 +45,7 @@ public class UserOTPDAOImpl  implements UserOTPDAO{
 		}else{
 			System.out.println("userOTP object is null************");
 		}
+		System.out.println("userOTP object is null$$$$$$$$ "+objLogin.getUserID());
 		if(isUserPresent(objLogin.getUserID())){
 			userOTP.setUserId(objLogin.getUserID());
 			userOTP.setTimeOfGeneration(objUtilityManager.getOTPDate());
@@ -101,15 +102,18 @@ public class UserOTPDAOImpl  implements UserOTPDAO{
 	public boolean isUserPresent(String userid){
 		boolean flag=false;
 		
-		UserOTP userOTP=jdbcTemplate.queryForObject(Consts.GET_USER_OTP, new Object[]{userid}, new UserOTPMapper());
-		if(null!=userOTP.getUserId() && !userOTP.getUserId().isEmpty()){
-			flag=true;
-			return flag;
-			
-		}else{
-			return flag;
-		}
+List<UserOTP> list=jdbcTemplate.query(Consts.GET_USER_OTP, new Object[]{userid},new UserOTPMapper());
 		
+		//UserOTP userOTP=jdbcTemplate.queryForObject(Consts.GET_USER_OTP, new Object[]{userid}, new UserOTPMapper());
+		System.out.println("userOTP.getUserId() -->"+list.size());
+		if(list.size()>0 && null!=list.get(0).getUserId() && !list.get(0).getUserId().isEmpty()){
+			flag=true;
+			System.out.println("User present....");			
+		}else{
+			flag=false;
+			System.out.println("User not present....");
+		}
+		return flag; 
 	}
 
 }
