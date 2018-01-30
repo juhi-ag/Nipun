@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.nipun.pojo.User;
+import com.nipun.modal.User;
 
 public class NipunDaoImpl implements NipunDao{
 	

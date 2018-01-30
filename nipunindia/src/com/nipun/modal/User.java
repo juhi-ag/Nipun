@@ -1,4 +1,4 @@
-package com.nipun.pojo;
+package com.nipun.modal;
 
 public class User {
 	

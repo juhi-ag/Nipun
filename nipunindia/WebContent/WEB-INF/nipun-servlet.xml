@@ -59,6 +59,8 @@
     <bean id="userOTPServiceImpl" class="com.nipun.service.UserOTPServiceImpl"/> 
    <bean id="userOTPDAOImpl" class="com.nipun.dao.UserOTPDAOImpl"/>
    
+
+   
  	<bean id="nipunService" class="com.nipun.service.NipunServiceImpl"/> 
    <bean id="nipunDao" class="com.nipun.dao.NipunDaoImpl"/>
 </beans>

@@ -3,7 +3,7 @@ package com.nipun.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.nipun.pojo.User;
+import com.nipun.modal.User;
 
 public interface NipunDao {
 	

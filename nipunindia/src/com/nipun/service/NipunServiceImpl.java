@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nipun.dao.NipunDao;
-import com.nipun.pojo.User;
+import com.nipun.modal.User;
 
 public class NipunServiceImpl implements NipunService {
 	
